@@ -1,0 +1,32 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.subheading {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.fancy-input {
+  padding: 12px;
+  font-size: 1.25rem;
+}
+
+.fancy-button {
+  padding: 12px;
+  font-size: 1.25rem;
+}
+
+.title-input {
+  margin-top: 20px;
+}
+
+.status {
+  padding: 20px;
+}
+
+.important {
+  font-size: 24px;
+  color: red;
+}
