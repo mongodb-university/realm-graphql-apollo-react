@@ -1,68 +1,57 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# MongoDB Realm GraphQL - Apollo (React)
 
-## Available Scripts
+This code demonstrates how to connect to your MongoDB Realm app's [GraphQL
+API](https://docs.mongodb.com/realm/graphql) from a React application using [Apollo Client
+3](https://www.apollographql.com/docs/react/). For a detailed walkthrough, check out [Use GraphQL
+with Apollo Client (React)](https://docs.mongodb.com/realm/web/graphql-apollo-react) in the MongoDB
+Realm documentation.
 
-In the project directory, you can run:
+## Set Up
 
-### `yarn start`
+1. Clone the Repository
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+   ```shell
+   git clone https://github.com/mongodb-university/realm-graphql-apollo-react
+   cd realm-graphql-apollo-react
+   ```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+2. Install the dependencies
 
-### `yarn test`
+   Install the project dependencies with `npm`:
+   
+   ```shell
+   npm install
+   ```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Load the Sample Data
 
-### `yarn build`
+   In MongoDB Atlas, [load the sample datasets into your
+   cluster](https://docs.atlas.mongodb.com/sample-data/).
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. Create a MongoDB Realm App
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+   In the same project, [create a new MongoDB Realm
+   app](https://docs.mongodb.com/realm/procedures/create-realm-app/). Make sure that the app is
+   linked to the cluster that has the sample data.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. Generate a Schema
 
-### `yarn eject`
+   Navigate to the `sample_mflix.movies` collection in the Realm UI and generate a schema based on
+   the sample data. When you save the schema, Realm automatically generates corresponding GraphQL
+   types.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+6. Enable Anonymous Authentication
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   This sample app automatically logs in as an anonymous user, so make sure that you enable the
+   Anonymous provider.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+7. Add Your App ID
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+   [Find your App ID](https://docs.mongodb.com/realm/get-started/find-your-app-id/) and paste it
+   into ``src/index.js``.
 
-## Learn More
+8. Run the App
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+   ```shell
+   npm run start
+   ```
