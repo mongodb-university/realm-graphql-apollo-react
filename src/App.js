@@ -39,7 +39,7 @@ export default function App(props) {
           type="text"
         />
       </div>
-      {APP_ID === "myapp-abcde" ? (
+      {APP_ID === "<Your App ID>" ? (
         <div className="status important">
           Replace APP_ID with your App ID in index.js
         </div>

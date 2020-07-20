@@ -3,12 +3,11 @@ import React from "react";
 import { render } from "react-dom";
 // Apollo
 import {
+  ApolloProvider,
   ApolloClient,
   HttpLink,
   InMemoryCache,
-  ApolloProvider
 } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
 // Realm
 import * as Realm from "realm-web";
 // Check out app.js for examples of how to run GraphQL operations
@@ -26,45 +25,39 @@ import App from "./App";
 // Once your app is set up, replace the value of APP_ID with your App ID
 export const APP_ID = "<Your App ID>";
 
-const app = new Realm.App({
-  id: APP_ID,
-  baseUrl: "https://realm.mongodb.com"
-});
+const graphql_url = `https://realm.mongodb.com/api/client/v2.0/app/${APP_ID}/graphql`;
 
-// Add an Authorization header with a valid user access token to all GraphQL requests
-const authorizationHeaderLink = setContext(async (_, { headers }) => {
-  if (app.currentUser) {
+const app = new Realm.App(APP_ID);
+
+// Get a valid Realm user access token to authenticate requests
+async function getValidAccessToken() {
+  if (!app.currentUser) {
+    // If no user is logged in, log in an anonymous user
+    await app.logIn(Realm.Credentials.anonymous());
+  } else {
     // The logged in user's access token might be stale,  
     // Refreshing custom data also refreshes the access token
     await app.currentUser.refreshCustomData();
-  } else {
-    // If no user is logged in, log in an anonymous user
-    await app.logIn(Realm.Credentials.anonymous());
   }
   // Get a valid access token for the current user
   const { accessToken } = app.currentUser;
+  return accessToken
+}
 
-  // Set the Authorization header, preserving any other headers
-  return {
-    headers: {
-      ...headers,
-      Authorization: `Bearer ${accessToken}`
-    }
-  };
-});
-
-// Construct a new Apollo HttpLink that connects to your app's GraphQL endpoint
-const graphql_url = `https://realm.mongodb.com/api/client/v2.0/app/${APP_ID}/graphql`;
-const httpLink = new HttpLink({ uri: graphql_url });
-
-// Construct a new Apollo client with the links we just defined
 const client = new ApolloClient({
-  link: authorizationHeaderLink.concat(httpLink),
+  link: new HttpLink({
+    uri: graphql_url,
+    fetch: async (uri, options) => {
+      const accessToken = await getValidAccessToken();
+      options.headers.Authorization = `Bearer ${accessToken}`;
+      return fetch(uri, options);
+    },
+  }),
   cache: new InMemoryCache()
 });
 
+// Wrap your app with an ApolloProvider
 render(
-  // Wrap your app with an ApolloProvider
   <ApolloProvider client={client}>
     <App />
   </ApolloProvider>,
