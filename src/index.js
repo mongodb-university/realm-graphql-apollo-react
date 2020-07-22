@@ -35,8 +35,8 @@ async function getValidAccessToken() {
     // If no user is logged in, log in an anonymous user
     await app.logIn(Realm.Credentials.anonymous());
   } else {
-    // The logged in user's access token might be stale,  
-    // Refreshing custom data also refreshes the access token
+    // The logged in user's access token might be stale.
+    // Refreshing custom data also refreshes the access token.
     await app.currentUser.refreshCustomData();
   }
   // Get a valid access token for the current user
@@ -47,6 +47,9 @@ async function getValidAccessToken() {
 const client = new ApolloClient({
   link: new HttpLink({
     uri: graphql_url,
+    // We define a custom fetch handler for the Apollo client that lets us authenticate GraphQL requests.
+    // The function intercepts every Apollo HTTP request and adds an Authorization header with a valid
+    // access token before sending the request.
     fetch: async (uri, options) => {
       const accessToken = await getValidAccessToken();
       options.headers.Authorization = `Bearer ${accessToken}`;
