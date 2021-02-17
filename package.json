@@ -1,5 +1,5 @@
 {
-  "name": "apollo3",
+  "name": "realm-graphql-apollo-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
