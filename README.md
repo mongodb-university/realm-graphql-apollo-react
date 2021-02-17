@@ -36,21 +36,26 @@ Realm documentation.
 
 5. Generate a Schema
 
-   Navigate to the `sample_mflix.movies` collection in the Realm UI and generate a schema based on
-   the sample data. When you save the schema, Realm automatically generates corresponding GraphQL
-   types.
+   Find the `sample_mflix.movies` collection on the Schema screen of the Realm UI and generate a
+   schema based on the sample data. When you save the schema, Realm automatically generates
+   corresponding GraphQL types.
 
-6. Enable Anonymous Authentication
+6. Define Rules
+
+   Find the `sample_mflix.movies` collection on the Rules screen of the Realm UI and set the default
+   role to have full read and write permission.
+
+7. Enable Anonymous Authentication
 
    This sample app automatically logs in as an anonymous user, so make sure that you enable the
    Anonymous provider.
 
-7. Add Your App ID
+8. Add Your App ID
 
    [Find your App ID](https://docs.mongodb.com/realm/get-started/find-your-app-id/) and paste it
    into ``src/index.js``.
 
-8. Run the App
+9.  Run the App
 
    ```shell
    npm run start
