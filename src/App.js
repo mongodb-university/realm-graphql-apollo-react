@@ -9,6 +9,11 @@ export default function App(props) {
   const { loading, data } = useQuery(FIND_MOVIE, {
     variables: { query: { title: searchText } }
   });
+  console.log({ loading, data })
+  
+  const { loadingTelemetry, data: telemetryData } = useQuery(GET_TELEMETRY, {
+    variables: { query: { title: searchText } }
+  });
 
   const movie = data ? data.movie : null;
   const [updateMovie, { loading: updating }] = useMutation(UPDATE_MOVIE);
@@ -35,7 +40,7 @@ export default function App(props) {
         <input
           className="fancy-input"
           value={searchText}
-          onChange={e => setSearchText(e.target.value)}
+          onChange={(e) => setSearchText(e.target.value)}
           type="text"
         />
       </div>
@@ -55,7 +60,7 @@ export default function App(props) {
                 type="text"
                 className="fancy-input"
                 value={newTitleText}
-                onChange={e => setNewTitleText(e.target.value)}
+                onChange={(e) => setNewTitleText(e.target.value)}
               />
               <button
                 className="fancy-button"
@@ -72,6 +77,22 @@ export default function App(props) {
           <img alt={`Poster for ${movie.title}`} src={movie.poster} />
         </div>
       )}
+      <table>
+        <th>
+          <td>item._id</td>
+          <td>item.day</td>
+          <td>item.month</td>
+        </th>
+        {telemetryData.getTelemetryData.map((item) => {
+          return (
+            <tr key={item._id}>
+              <td>{item._id}</td>
+              <td>{item.day}</td>
+              <td>{item.month}</td>
+            </tr>
+          );
+        })}
+      </table>
     </div>
   );
 }

@@ -1,8 +1,25 @@
 import gql from "graphql-tag";
 
+// export const FIND_MOVIE = gql`
+//   query FindMovie($query: MovieQueryInput!) {
+//     movie(query: $query) {
+//       _id
+//       title
+//       year
+//       runtime
+//       rated
+//       poster
+//     }
+//   }
+// `;
+
 export const FIND_MOVIE = gql`
-  query FindMovie($query: MovieQueryInput!) {
-    movie(query: $query) {
+  query FindMovie {
+    movie: searchOneMovie(input: {
+      title: "ocean",
+      plot: "oceans not safe",
+      cast: ["Kirk Douglas"]
+    }) {
       _id
       title
       year
