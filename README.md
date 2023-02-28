@@ -55,7 +55,12 @@ Realm documentation.
    [Find your App ID](https://docs.mongodb.com/realm/get-started/find-your-app-id/) and paste it
    into ``src/index.js``.
 
-9.  Run the App
+9. Add Your GraphQL Endpoint 
+
+   [Find your GraphQL Endpoint (URL)](https://www.mongodb.com/docs/atlas/app-services/graphql/expose-data/) and paste it
+   into ``src/index.js``.
+
+10.  Run the App
 
    ```shell
    npm run start
