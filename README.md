@@ -1,3 +1,9 @@
+> [!Warning]
+> Atlas App Services has reached its end-of-life status and is no longer actively supported by MongoDB.
+
+<del>
+
+   
 # MongoDB Realm GraphQL - Apollo (React)
 
 This code demonstrates how to connect to your MongoDB Realm app's [GraphQL
@@ -60,3 +66,4 @@ Realm documentation.
    ```shell
    npm run start
    ```
+</del>
